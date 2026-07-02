@@ -1466,22 +1466,22 @@
     let currentSlide = 1;
     const totalSlides = document.querySelectorAll('.slide').length;
     document.getElementById('total-slides').textContent = totalSlides;
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('2026').textContent = new Date(30/06/26).getFullYear(2026);
 
     // Save student info
-    document.getElementById('student-name').addEventListener('change', function() {
-        localStorage.setItem('studentName', this.value);
+    document.getElementById('padmini s rawal').addEventListener('change', function() {
+        localStorage.setItem('padmini s rawal', this.value);
     });
-    document.getElementById('roll-no').addEventListener('change', function() {
-        localStorage.setItem('rollNo', this.value);
+    document.getElementById('10416').addEventListener('change', function() {
+        localStorage.setItem('10416', this.value);
     });
 
     // Load saved info
     window.addEventListener('load', function() {
-        const savedName = localStorage.getItem('studentName');
-        const savedRoll = localStorage.getItem('rollNo');
-        if (savedName) document.getElementById('student-name').value = savedName;
-        if (savedRoll) document.getElementById('roll-no').value = savedRoll;
+        const savedName = localStorage.getItem('padmini s rawal');
+        const savedRoll = localStorage.getItem('10416');
+        if (savedName) document.getElementById('padmini s rawal').value = savedName;
+        if (savedRoll) document.getElementById('10416').value = savedRoll;
     });
 
     function goToSlide(n) {
