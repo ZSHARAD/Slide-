@@ -2,112 +2,350 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zsharad - Galvanized Doors</title>
 <style>
-  body {
+  * {
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #1a1a1a;
+    padding: 0;
+    box-sizing: border-box;
   }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
   .flyer {
     max-width: 600px;
-    margin: 40px auto;
-    background: #111111;
-    border-radius: 14px;
+    width: 100%;
+    background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    border: 1px solid #d4af37;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.2);
+    border: 2px solid #d4af37;
+    animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+
+  .flyer:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(212, 175, 55, 0.3);
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .header {
-    background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 100%);
     color: #f4d792;
-    padding: 30px 25px 20px;
+    padding: 40px 30px 25px;
     text-align: center;
-    border-bottom: 2px solid #d4af37;
+    border-bottom: 3px solid #d4af37;
+    position: relative;
+    overflow: hidden;
   }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 20px); }
+  }
+
   .header h1 {
     margin: 0;
-    font-size: 32px;
-    letter-spacing: 3px;
-    font-weight: 700;
+    font-size: 42px;
+    letter-spacing: 4px;
+    font-weight: 800;
     color: #f4d792;
-    text-shadow: 0 0 8px rgba(212,175,55,0.4);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 4px 12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+    animation: glow 3s ease-in-out infinite;
   }
+
+  @keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 4px 12px rgba(0, 0, 0, 0.5); }
+    50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 4px 20px rgba(212, 175, 55, 0.3); }
+  }
+
   .header p {
-    margin: 8px 0 0;
+    margin: 12px 0 0;
     font-size: 13px;
-    color: #cfcfcf;
-    letter-spacing: 1px;
+    color: #d9d9d9;
+    letter-spacing: 1.5px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInDown 0.8s ease 0.2s both;
   }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .gallery {
     width: 100%;
     display: block;
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0a;
+    aspect-ratio: 600/400;
   }
+
   .gallery img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    transition: transform 0.6s ease;
+    animation: imageZoom 0.8s ease-out;
   }
+
+  @keyframes imageZoom {
+    from {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .gallery:hover img {
+    transform: scale(1.05);
+  }
+
   .divider {
-    height: 3px;
-    background: repeating-linear-gradient(90deg, #d4af37, #d4af37 12px, #111 12px, #111 24px);
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #d4af37 0px, #d4af37 15px, transparent 15px, transparent 30px);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
   }
+
   .badge-wrap {
     text-align: center;
-    margin-top: -26px;
+    margin-top: -30px;
+    position: relative;
+    z-index: 2;
   }
+
   .badge {
     display: inline-block;
-    background: #d4af37;
+    background: linear-gradient(135deg, #d4af37 0%, #e8c952 100%);
     color: #111;
-    font-weight: bold;
-    padding: 16px 28px;
-    border-radius: 50px;
-    font-size: 24px;
-    box-shadow: 0 6px 18px rgba(212,175,55,0.5);
+    font-weight: 900;
+    padding: 18px 36px;
+    border-radius: 60px;
+    font-size: 26px;
+    letter-spacing: 2px;
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
     border: 3px solid #111;
+    animation: pulse 2s ease-in-out infinite, badgeBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+    transition: transform 0.3s ease;
+    cursor: pointer;
   }
+
+  .badge:hover {
+    transform: scale(1.08);
+    box-shadow: 0 16px 40px rgba(212, 175, 55, 0.7), inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5), inset 0 -2px 4px rgba(0, 0, 0, 0.2); }
+    50% { box-shadow: 0 12px 40px rgba(212, 175, 55, 0.8), inset 0 -2px 4px rgba(0, 0, 0, 0.2); }
+  }
+
+  @keyframes badgeBounce {
+    0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
   .content {
-    padding: 35px 30px 20px;
+    padding: 45px 35px 30px;
+    animation: fadeInUp 0.8s ease 0.4s both;
   }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .content h2 {
     color: #f4d792;
-    font-size: 19px;
-    margin: 0 0 18px;
+    font-size: 22px;
+    margin: 0 0 25px;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    font-weight: 700;
   }
+
   .features {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 16px;
   }
+
   .feature {
-    background: #1c1c1c;
-    border-left: 4px solid #d4af37;
-    padding: 12px 14px;
-    font-size: 14px;
-    color: #eee;
-    border-radius: 6px;
+    background: linear-gradient(135deg, #1c1c1c 0%, #252525 100%);
+    border-left: 5px solid #d4af37;
+    padding: 16px 18px;
+    font-size: 15px;
+    color: #f0f0f0;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: calc(0.5s + var(--index) * 0.1s);
   }
-  .contact {
-    background: #0a0a0a;
+
+  .feature:nth-child(1) { --index: 0; }
+  .feature:nth-child(2) { --index: 1; }
+  .feature:nth-child(3) { --index: 2; }
+  .feature:nth-child(4) { --index: 3; }
+
+  .feature:hover {
+    transform: translateY(-6px) translateX(6px);
+    background: linear-gradient(135deg, #252525 0%, #2a2a2a 100%);
+    box-shadow: 0 12px 28px rgba(212, 175, 55, 0.25), 0 0 20px rgba(212, 175, 55, 0.1);
+    border-left-color: #e8c952;
     color: #f4d792;
-    padding: 22px 30px;
+  }
+
+  .contact {
+    background: linear-gradient(135deg, #0a0a0a 0%, #121212 100%);
+    color: #f4d792;
+    padding: 28px 35px;
     text-align: center;
-    font-size: 14px;
-    border-top: 2px solid #d4af37;
+    font-size: 15px;
+    border-top: 3px solid #d4af37;
+    animation: fadeInUp 0.8s ease 0.6s both;
   }
+
   .contact div {
-    margin: 6px 0;
-    color: #eee;
+    margin: 10px 0;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
   }
+
+  .contact div:hover {
+    color: #f4d792;
+    background: rgba(212, 175, 55, 0.1);
+    transform: translateX(8px);
+  }
+
+  .contact div span {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 16px;
+    animation: rotate 2s linear infinite;
+  }
+
+  .contact div:nth-child(1) span { animation-delay: 0s; }
+  .contact div:nth-child(2) span { animation-delay: 0.3s; }
+  .contact div:nth-child(3) span { animation-delay: 0.6s; }
+
+  @keyframes rotate {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+  }
+
   .footer {
     text-align: center;
-    padding: 14px;
-    font-size: 12px;
+    padding: 18px 20px;
+    font-size: 13px;
     color: #999;
     font-style: italic;
-    background: #111;
+    background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .footer:hover {
+    color: #d4af37;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .flyer {
+      border-radius: 12px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      letter-spacing: 2px;
+    }
+
+    .header p {
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    .badge {
+      font-size: 22px;
+      padding: 14px 28px;
+    }
+
+    .content {
+      padding: 30px 25px 20px;
+    }
+
+    .content h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      gap: 12px;
+    }
+
+    .feature {
+      padding: 12px 14px;
+      font-size: 13px;
+    }
+
+    .contact {
+      padding: 20px 25px;
+      font-size: 14px;
+    }
   }
 </style>
 </head>
@@ -119,7 +357,7 @@
     </div>
 
     <div class="gallery">
-      <img src="doors.jpg" alt="Zsharad Galvanized Doors">
+      <img src="doors.jpg" alt="Zsharad Galvanized Doors" loading="lazy">
     </div>
 
     <div class="divider"></div>
@@ -139,9 +377,9 @@
     </div>
 
     <div class="contact">
-      <div>📞 +91 898 237 9366</div>
-      <div>📧 Sales.zsharad@gmail.com</div>
-      <div>🌐 zsharad.online</div>
+      <div><span>📞</span>+91 898 237 9366</div>
+      <div><span>📧</span>Sales.zsharad@gmail.com</div>
+      <div><span>🌐</span>zsharad.online</div>
     </div>
 
     <div class="footer">Zsharad — Strength That Stands the Test of Time.</div>
